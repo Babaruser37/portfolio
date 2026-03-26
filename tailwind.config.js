@@ -5,10 +5,9 @@ export default {
     extend: {
       // Customizing standard fonts
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'], // Or 'Geist Sans' if using Vercel's font
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Adding specific colors from the Sarah Chen design
         brand: {
           bg: '#FDFDFD',   // Main site background
           pink: '#FDE9F3', // Button/accent color
