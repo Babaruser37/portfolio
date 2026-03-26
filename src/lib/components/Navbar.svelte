@@ -10,9 +10,12 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-md border-b border-white/20 shadow-sm font-sans">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     
-    <div class="text-gray-900 text-xl font-semibold tracking-tight">
+    <a 
+      href="#top" 
+      class="text-gray-900 text-xl font-semibold tracking-tight hover:opacity-70 transition-opacity cursor-pointer"
+    >
       Christian Garcia Flores
-    </div>
+    </a>
 
     <div class="hidden md:flex items-center space-x-10">
       {#each navItems as item}
