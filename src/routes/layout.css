@@ -1,9 +1,9 @@
 @import 'tailwindcss';
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @layer base {
   :root {
-    /* Optional: Force the Inter font if it's not picking up from config */
     font-family: 'Inter', system-ui, sans-serif;
   }
 
