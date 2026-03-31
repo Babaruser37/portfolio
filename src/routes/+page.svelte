@@ -16,6 +16,8 @@
   import HTML from '$lib/assets/Logos/HTML.svg'
   import JS from '$lib/assets/Logos/JavaScript.svg'
   import Electron from '$lib/assets/Logos/Electron.svg'
+  import Supabase from '$lib/assets/Logos/supabase.svg'
+  import NextJS from '$lib/assets/Logos/NextJS.svg'
 
   import projects from  '$lib/utils/projects.json'
 
@@ -40,7 +42,9 @@
     javascript : JS,
     html: HTML, 
     css : CSS,
-    electron : Electron
+    electron : Electron,
+    nextjs : NextJS,
+    supabase : Supabase
   };
 
   let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.";

@@ -15,6 +15,14 @@
     "githubLink": "https://github.com/Babaruser37/portfolio"
   },
   {
+    "title":"Husky Hack",
+    "description":"Organizer and front-end developer for George Brown Polytechnics first 12-hour hackathon. Accepted by Major League Hacking",
+    "tech":["Docker", "Supabase", "NextJS", "React", "Tailwind", "TypeScript"],
+    "image": "https://www.huskyhack.ca/_next/static/media/logo.d026b3a8.svg",
+    "githubLink": "https://github.com/gbchuskyhack/husky-hack-website-2026",
+    "demoLink": "https://www.huskyhack.ca/"
+  },
+  {
     "title":"Food Planner",
     "description": "An electron based web app designed to select and display meal preps from a collection of pre-selected options.",
     "tech": ["Python", "Electron", "JavaScript"],
