@@ -20,6 +20,7 @@
   import NextJS from '$lib/assets/Logos/NextJS.svg'
 
   import projects from  '$lib/utils/projects.json'
+  import stats from '$lib/utils/stats.json'
 
   
 
@@ -49,6 +50,56 @@
 
   let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.";
   let characters = bioText.split("");
+
+  let artistVideoUrl = $state('');
+
+  function toYoutubeEmbedUrl(url: string) {
+    try {
+      const u = new URL(url);
+      if (u.hostname === 'youtu.be') {
+        return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+      }
+      if (u.hostname.includes('youtube.com')) {
+        const videoId = u.searchParams.get('v');
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+        if (u.pathname.startsWith('/embed/')) {
+          return url;
+        }
+      }
+    } catch {
+      // fallback regex
+    }
+
+    const match = url.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
+    if (match?.[1]) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+
+    return '';
+  }
+
+  function openArtistVideo() {
+    artistVideoUrl = toYoutubeEmbedUrl(stats.favouriteArtistYoutube);
+  }
+
+  function closeArtistVideo() {
+    artistVideoUrl = '';
+  }
+
+  function calculateAgeDecimal(birthDate: string) {
+    const birth = new Date(birthDate);
+    const now = new Date();
+    const diffMs = now.getTime() - birth.getTime();
+
+    // Using tropical year average for smooth decimal age
+    const yearMs = 365.2425 * 24 * 60 * 60 * 1000;
+    const years = diffMs / yearMs;
+    return Number(years.toFixed(10));
+  }
+
+  let ageDecimal = $state(calculateAgeDecimal(stats.birthDate));
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -101,6 +152,9 @@
         }
       });
     };
+    setInterval(() => {
+      ageDecimal = calculateAgeDecimal(stats.birthDate);
+    }, 100); 
   });
 </script>
 
@@ -137,6 +191,50 @@
           </span>
         {/each}
       </div>
+
+      <div class="stats grid grid-cols-3 gap-8 mt-12">
+        <div class="stat text-center">
+          <div class="text-4xl font-bold text-gray-900">{ageDecimal}</div>
+          <div class="text-lg text-gray-600">Years Old</div>
+        </div>
+        <div class="stat text-center">
+          <div class="text-4xl font-bold text-gray-900">{stats.countriesTraveled}</div>
+          <div class="text-lg text-gray-600">Countries Traveled</div>
+        </div>
+        <div class="stat text-center">
+          <button
+            class="text-4xl font-bold text-blue-600 hover:text-blue-800 focus:outline-none"
+            onclick={openArtistVideo}
+          >
+            {stats.favouriteArtist}
+          </button>
+          <div class="text-lg text-gray-600">Favourite Artist (click to open song)</div>
+        </div>
+      </div>
+
+      {#if artistVideoUrl}
+        <div class="mt-8">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm text-gray-500">Now playing: {stats.favouriteArtist}</span>
+            <button
+              class="px-3 py-1 rounded-md bg-red-500 text-white hover:bg-red-600"
+              onclick={closeArtistVideo}
+            >
+              Close
+            </button>
+          </div>
+          <div class="aspect-video border rounded-2xl overflow-hidden bg-black">
+            <iframe
+              class="w-full h-full"
+              src={artistVideoUrl}
+              title="Favourite Artist Song"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      {/if}
     </div>
   </section>
 
