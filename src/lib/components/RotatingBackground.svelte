@@ -13,9 +13,8 @@
       rotation: 360,
       ease: "none",
       scrollTrigger: {
-        trigger: "body",
         start: "top top",
-        end: () => ScrollTrigger.maxScroll(window), // Dynamically calculate the very end of the page
+        end: "bottom bottom", // track the full page scroll range reliably
         scrub: 1, // Smooth rotation that follows scroll
         invalidateOnRefresh: true,
       }

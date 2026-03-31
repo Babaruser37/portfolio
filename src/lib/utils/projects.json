@@ -2,19 +2,30 @@
   {
     "title": "Handy Automator",
     "description": "A hardware-software integration allowing hands-free control of household appliances using real-time spatial mapping and coordinate tracking.",
-    "tech": ["Python", "OpenCV", "MediaPipe", "React Native", "Postgres"],
-    "image": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=1000"
+    "tech": ["Python", "OpenCV", "MediaPipe", "React", "Postgres", "Docker"],
+    "image": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=1000",
+    "githubLink": "https://github.com/christian/example-handy-automator",
+    "demoLink": "https://github.com/caiocotts/handy-automator"
   },
   {
     "title": "Interactive Developer Portfolio",
     "description": "A high-performance web application utilizing modern frontend frameworks and complex scroll-driven timeline animations.",
-    "tech": ["Svelte 5", "TypeScript", "GSAP", "Tailwind CSS"],
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000"
+    "tech": ["Svelte", "TypeScript", "GSAP", "Tailwind", "Nodejs"],
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000",
+    "githubLink": "https://github.com/Babaruser37/portfolio"
   },
   {
-    "title": "System Diagnostic Dashboard",
-    "description": "Real-time monitoring interface for tracking distributed system health, database latency, and active microservices.",
-    "tech": ["Postgres", "React", "Node.js", "Docker"],
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000"
+    "title":"Food Planner",
+    "description": "An electron based web app designed to select and display meal preps from a collection of pre-selected options.",
+    "tech": ["Python", "Electron", "JavaScript"],
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000",
+    "githubLink": "https://github.com/Babaruser37/Food-Planner"
+  },
+  {
+    "title" : "The Cloak Collective",
+    "description" : "A website to promote and showcase the designs of a Toronto based fashion artist",
+    "tech":["HTML", "CSS", "JavaScript"],
+    "image": "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638882786/EducationHub/photos/sun-blasts-a-m66-flare.jpg",
+    "demoLink":"https://thecloakcollective.com"
   }
 ]

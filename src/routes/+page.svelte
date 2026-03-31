@@ -4,7 +4,19 @@
   import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
   import Navbar from '$lib/components/Navbar.svelte';
   import RotatingBackground from '$lib/components/RotatingBackground.svelte';
+
   import ChristianGarciaFlores from '$lib/assets/ChristianGarciaFlores.jpg';
+  import OpenCV from '$lib/assets/logos/OpenCV.svg'
+  import MP from '$lib/assets/logos/MediaPipe.svg'
+  import React from '$lib/assets/Logos/React.svg'
+  import Svelte from '$lib/assets/Logos/Svelte.svg'
+  import GSAP from '$lib/assets/Logos/GSAP.svg'
+  import Tailwind from '$lib/assets/Logos/Tailwindcss.svg'
+  import CSS from '$lib/assets/Logos/CSS.svg'
+  import HTML from '$lib/assets/Logos/HTML.svg'
+  import JS from '$lib/assets/Logos/JavaScript.svg'
+  import Electron from '$lib/assets/Logos/Electron.svg'
+
   import projects from  '$lib/utils/projects.json'
 
   
@@ -12,8 +24,24 @@
   let aboutSection: HTMLElement;
   let aboutTitle: HTMLElement;
   let textBlock: HTMLElement;
-  let projectsSection: HTMLElement;
-  let horizontalWrapper: HTMLElement;
+
+  const techLogos: Record<string, string> = {
+    postgres: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    python: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    svelte: Svelte,
+    typescript: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    gsap: GSAP,
+    tailwind: Tailwind,
+    react: React,
+    nodejs: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    docker: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg",
+    opencv: OpenCV,
+    mediapipe: MP,
+    javascript : JS,
+    html: HTML, 
+    css : CSS,
+    electron : Electron
+  };
 
   let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.";
   let characters = bioText.split("");
@@ -43,25 +71,6 @@
         scrub: 1
       }
     });
-
-    // Horizontal Projects
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: projectsSection,
-        pin: true,
-        scrub: 1,
-        start: "top top",
-        end: () => `+=${window.innerHeight * 5}` // Hard-coded to 5x viewport height
-      }
-    });
-
-    tl.to(horizontalWrapper, {
-      x: () => -(horizontalWrapper.scrollWidth - window.innerWidth),
-      ease: "none"
-    });
-
-    // Recalculate all scroll positions now that pinning has added height to the page
-    ScrollTrigger.refresh();
 
     // Scramble Logic
     const charElements = textBlock.querySelectorAll('.char');
@@ -127,53 +136,50 @@
     </div>
   </section>
 
-  <section 
-      id="projects" 
-      bind:this={projectsSection} 
-      class="h-screen flex flex-col justify-center overflow-hidden border-t border-gray-100 bg-transparent"
-    >
-      <div class="max-w-6xl mx-auto px-6 w-full mb-8 shrink-0">
-        <h2 class="text-6xl font-bold tracking-tighter">Featured Work</h2>
-      </div>
-
-      <div 
-        bind:this={horizontalWrapper} 
-        class="flex gap-12 px-6 w-max items-center h-[60vh]"
-      >
+  <section id="projects" class="border-t border-gray-100 bg-transparent py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-6xl font-bold tracking-tighter">Featured Work</h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {#each projects as project (project.title)}
-          <div class="w-[85vw] md:w-[60vw] lg:w-[800px] h-full flex flex-col justify-between shrink-0 bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden group">
-            
-            <div class="h-[55%] overflow-hidden bg-gray-100">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              >
-            </div>
-
-            <div class="p-8 md:p-10 h-[45%] flex flex-col justify-between">
-              <div>
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6 line-clamp-2">
-                  {project.description}
-                </p>
+          <article class="group perspective-1000">
+            <div class="flip-card-inner relative w-full h-96 rounded-3xl shadow-lg transition-transform duration-700 ease-out transform-style-preserve-3d">
+              <div class="flip-card-face front absolute inset-0 rounded-3xl bg-white border border-gray-200 overflow-hidden flex flex-col items-center justify-center p-6">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">{project.title}</h3>
+                <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
+                  {#each project.tech.slice(0,6) as tech, i (tech)}
+                    <img
+                      src={techLogos[tech.toLowerCase()] || 'https://via.placeholder.com/40?text=?'}
+                      alt={tech}
+                      title={tech}
+                      class="w-10 h-10 object-contain logo-float"
+                      style="animation-delay: {i * 0.1}s"
+                    />
+                  {/each}
+                </div>
               </div>
-              
-              <div class="flex flex-wrap gap-3">
-                {#each project.tech as tech (tech)}
-                  <span class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg">
-                    {tech}
-                  </span> 
-                {/each}
+              <div class="flip-card-face back absolute inset-0 rounded-3xl text-white p-6 transform rotate-y-180 border border-indigo-500 flex flex-col" style="background-image: url({project.image}); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 rounded-3xl bg-indigo-900/70"></div>
+                <div class="relative z-10 flex flex-col h-full">
+                  <div class="flip-text opacity-0">
+                    <h3 class="text-2xl font-bold mb-3">{project.title}</h3>
+                    <p class="text-sm leading-relaxed mb-4">{project.description}</p>
+                  </div>
+                  <div class="mt-auto flex flex-col gap-3"> 
+                    {#if project.githubLink}
+                    <a href={project.githubLink} target="_blank" rel="noreferrer" class="inline-block text-center rounded-lg bg-white text-indigo-800 font-semibold py-2">View on GitHub</a>
+                  {/if}
+                  {#if project.demoLink}
+                    <a href={project.demoLink} target="_blank" rel="noreferrer" class="inline-block text-center rounded-lg bg-white text-indigo-800 font-semibold py-2">View Demo</a>
+                  {/if}
+                </div>
               </div>
             </div>
-
           </div>
+          </article>
         {/each}
-        
-        <div class="w-[10vw] shrink-0"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
   <section class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
     <div class="max-w-6xl mx-auto px-6 w-full">
@@ -195,5 +201,49 @@
   }
   .text-block:hover .char {
     color: #111;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .flip-card-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+  }
+
+  .flip-card-face {
+    backface-visibility: hidden;
+  }
+
+  .flip-card-face.back {
+    transform: rotateY(180deg);
+  }
+
+  .logo-float {
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+
+  .logo-float:hover {
+    transform: translateY(-4px) scale(1.1);
+  }
+
+  .flip-text {
+    display: inline-block;
+    opacity: 0;
+  }
+
+  article:hover .flip-text {
+    animation: fadeTextIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeTextIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  article:hover .flip-card-inner {
+    transform: rotateY(180deg);
   }
 </style>
