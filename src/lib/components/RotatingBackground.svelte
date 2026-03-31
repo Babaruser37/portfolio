@@ -15,8 +15,9 @@
       scrollTrigger: {
         trigger: "body",
         start: "top top",
-        end: "bottom bottom",
+        end: () => ScrollTrigger.maxScroll(window), // Dynamically calculate the very end of the page
         scrub: 1, // Smooth rotation that follows scroll
+        invalidateOnRefresh: true,
       }
     });
   });
