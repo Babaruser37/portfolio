@@ -115,6 +115,7 @@
   let contactMessage = $state('');
   let contactStatus = $state('');
   let contactStatusType = $state<'success' | 'error' | ''>('');
+  let flippedIndex = $state(-1);
 
   function handleContactSubmit(event: SubmitEvent) {
     event.preventDefault();
@@ -182,15 +183,16 @@
           backdropFilter: "blur(12px)",
           opacity: 1,
           ease: "none",
-          duration: 0.6
+          duration: 0.7
         }
       )
+      .to({}, { duration: 0.7 }) // keep fully visible longer, fade starts later
       .to(aboutSection, {
         backgroundColor: "rgba(255, 255, 255, 0.05)",
         backdropFilter: "blur(0px)",
         opacity: 0.3,
         ease: "none",
-        duration: 0.4
+        duration: 0.2
       });
 
     // Hero text animation - language transition
@@ -241,25 +243,25 @@
 
 <main class="relative z-10 font-sans"> 
   
-  <section id="hero" class="h-screen max-w-6xl mx-auto px-6 flex items-center justify-between gap-12 bg-transparent">
-    <div>
-      <h1 bind:this={heroH1} class="text-7xl font-bold pt-20 leading-tight">
+  <section id="hero" class="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-8 lg:gap-12 bg-transparent py-12 sm:py-0">
+    <div class="pt-12 sm:pt-20 flex-1">
+      <h1 bind:this={heroH1} class="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
         {currentGreeting.name} <br>
-        <span class="text-gray-400 text-6xl">{currentGreeting.title}</span>
+        <span class="text-gray-400 text-2xl sm:text-4xl lg:text-6xl">{currentGreeting.title}</span>
       </h1> 
     </div>
-    <img src={ChristianGarciaFlores} alt="Christian" class="rounded-2xl shadow-2xl max-w-sm">
+    <img src={ChristianGarciaFlores} alt="Christian" class="rounded-2xl shadow-2xl w-full sm:w-80 lg:max-w-sm">
   </section>
 
   <section bind:this={aboutSection} id="about" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent backdrop-blur-sm">
-    <div class="max-w-6xl mx-auto px-6 w-full">
-      <div class="overflow-hidden mb-12">
-        <h2 bind:this={aboutTitle} class="text-6xl font-bold tracking-tighter">About Me</h2>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full py-12 sm:py-0">
+      <div class="overflow-hidden mb-8 sm:mb-12">
+        <h2 bind:this={aboutTitle} class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">About Me</h2>
       </div>
       
       <div 
         bind:this={textBlock} 
-        class="text-block text-3xl font-medium text-gray-700 leading-relaxed cursor-default select-none"
+        class="text-block text-base sm:text-xl lg:text-3xl font-medium text-gray-700 leading-relaxed cursor-default select-none"
       >
         {#each characters as char, i (i)}
           <span class="char inline-block min-w-[0.2em]" data-content={char}>
@@ -268,14 +270,14 @@
         {/each}
       </div>
 
-      <div class="stats grid grid-cols-3 gap-8 mt-12">
+      <div class="stats grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
         <div class="stat text-center">
-          <div class="text-4xl font-bold text-gray-900">{ageDecimal}</div>
-          <div class="text-lg text-gray-600">Years Old</div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">{ageDecimal}</div>
+          <div class="text-sm sm:text-base lg:text-lg text-gray-600">Years Old</div>
         </div>
         <div class="stat text-center">
-          <div class="text-4xl font-bold text-gray-900">{stats.countriesTraveled}</div>
-          <div class="text-lg text-gray-600">Countries Traveled</div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">{stats.countriesTraveled}</div>
+          <div class="text-sm sm:text-base lg:text-lg text-gray-600">Countries Traveled</div>
         </div>
         <div class="stat text-center">
           <button
@@ -314,13 +316,14 @@
     </div>
   </section>
 
-  <section id="projects" class="border-t border-gray-100 bg-transparent py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-6xl font-bold tracking-tighter">Featured Work</h2>
-      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {#each projects as project (project.title)}
+  <section id="projects" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">Featured Work</h2>
+      <div class="mt-6 sm:mt-8 lg:mt-10 grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {#each projects as project, idx (project.title)}
           <article class="group perspective-1000">
-            <div class="flip-card-inner relative w-full h-96 rounded-3xl shadow-lg transition-transform duration-700 ease-out transform-style-preserve-3d">
+            <button type="button" class="w-full h-full text-left" onclick={() => flippedIndex = flippedIndex === idx ? -1 : idx} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flippedIndex = flippedIndex === idx ? -1 : idx; } }}>
+              <div class="flip-card-inner relative w-full h-96 rounded-3xl shadow-lg transition-transform duration-700 ease-out transform-style-preserve-3d{flippedIndex === idx ? ' flipped' : ''}" style="transform: {flippedIndex === idx ? 'rotateY(180deg)' : 'none'}">
               <div class="flip-card-face front absolute inset-0 rounded-3xl bg-white border border-gray-200 overflow-hidden flex flex-col items-center justify-center p-6">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">{project.title}</h3>
                 <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
@@ -338,7 +341,7 @@
               <div class="flip-card-face back absolute inset-0 rounded-3xl text-white p-6 transform rotate-y-180 border border-indigo-500 flex flex-col" style="background-image: url({project.image}); background-size: cover; background-position: center;">
                 <div class="absolute inset-0 rounded-3xl bg-indigo-900/70"></div>
                 <div class="relative z-10 flex flex-col h-full">
-                  <div class="flip-text opacity-0">
+                  <div class="flip-text">
                     <h3 class="text-2xl font-bold mb-3">{project.title}</h3>
                     <p class="text-sm leading-relaxed mb-4">{project.description}</p>
                   </div>
@@ -352,7 +355,8 @@
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          </button>
           </article>
         {/each}
       </div>
@@ -360,20 +364,20 @@
   </section>
 
   <section id="contact" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
-    <div class="max-w-6xl mx-auto px-6 w-full">
-      <h2 class="text-6xl font-bold tracking-tighter">Contact</h2>
-      <p class="mt-4 text-lg text-gray-600">Send me a message and I&apos;ll get back to you as soon as possible.</p>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full py-12 sm:py-0">
+      <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">Contact</h2>
+      <p class="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600">Send me a message and I&apos;ll get back to you as soon as possible.</p>
 
-      <form class="mt-8 space-y-4 max-w-xl" onsubmit={handleContactSubmit}>
+      <form class="mt-6 sm:mt-8 space-y-4 max-w-xl" onsubmit={handleContactSubmit}>
         <div>
-          <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
-          <input id="name" type="text" bind:value={contactName} required class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+          <label class="block text-xs sm:text-sm font-medium text-gray-700" for="name">Name</label>
+          <input id="name" type="text" bind:value={contactName} required class="mt-1 block w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base shadow-sm focus:ring-blue-500 focus:border-blue-500" />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700" for="message">Message</label>
-          <textarea id="message" bind:value={contactMessage} required rows="5" class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+          <label class="block text-xs sm:text-sm font-medium text-gray-700" for="message">Message</label>
+          <textarea id="message" bind:value={contactMessage} required rows="5" class="mt-1 block w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
         </div>
-        <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700">Send Message</button>
+        <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base text-white font-semibold hover:bg-blue-700 transition-colors">Send Message</button>
       </form>
 
       {#if contactStatus}
@@ -421,10 +425,14 @@
   .flip-text {
     display: inline-block;
     opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  article:hover .flip-text {
-    animation: fadeTextIn 0.5s ease-in-out forwards;
+  .flip-card-inner.flipped .flip-text,
+  article:hover .flip-card-inner .flip-text {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @keyframes fadeTextIn {
@@ -432,6 +440,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* Desktop hover still works, mobile uses click to toggle */
   article:hover .flip-card-inner {
     transform: rotateY(180deg);
   }
