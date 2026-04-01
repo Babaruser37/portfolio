@@ -48,7 +48,7 @@
     supabase : Supabase
   };
 
-  let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.";
+  let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.I love listening to a wide varitey of music spanning from Jazz to Pop to RnB.";
   let characters = bioText.split("");
 
   let artistVideoUrl = $state('');
@@ -116,16 +116,38 @@
       }
     });
 
-    gsap.from(aboutSection, {
-      backgroundColor: "rgba(255, 255, 255, 0)", 
-      backdropFilter: "blur(0px)",
+    const aboutGlassTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: aboutSection,
-        start: "top 90%", 
-        end: "top 20%",
+        start: "top 90%",
+        end: "bottom 20%",
         scrub: 1
       }
     });
+
+    aboutGlassTimeline
+      .fromTo(
+        aboutSection,
+        {
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          backdropFilter: "blur(0px)",
+          opacity: 0.35
+        },
+        {
+          backgroundColor: "rgba(255, 255, 255, 0.75)",
+          backdropFilter: "blur(12px)",
+          opacity: 1,
+          ease: "none",
+          duration: 0.6
+        }
+      )
+      .to(aboutSection, {
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+        backdropFilter: "blur(0px)",
+        opacity: 0.3,
+        ease: "none",
+        duration: 0.4
+      });
 
     // Scramble Logic
     const charElements = textBlock.querySelectorAll('.char');

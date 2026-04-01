@@ -3,7 +3,7 @@
     "title": "Handy Automator",
     "description": "A hardware-software integration allowing hands-free control of household appliances using real-time spatial mapping and coordinate tracking.",
     "tech": ["Python", "OpenCV", "MediaPipe", "React", "Postgres", "Docker"],
-    "image": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=1000",
+    "image": "https://lh3.googleusercontent.com/hMocN5AmKXj8bZF96zINiX8hfZRW-fcsEe0cMHP1ir6cogNe4sbzYspw0WweNm7w7ZWwtdwicDoxZmxoswA-GLMnYOfJQneYSQ=w3840-h2160-c-rw-v3",
     "githubLink": "https://github.com/christian/example-handy-automator",
     "demoLink": "https://github.com/caiocotts/handy-automator"
   },
@@ -26,14 +26,14 @@
     "title":"Food Planner",
     "description": "An electron based web app designed to select and display meal preps from a collection of pre-selected options.",
     "tech": ["Python", "Electron", "JavaScript"],
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000",
+    "image": "https://media1.tenor.com/m/c-S8cUwVVVEAAAAC/duck-dance.gif",
     "githubLink": "https://github.com/Babaruser37/Food-Planner"
   },
   {
     "title" : "The Cloak Collective",
     "description" : "A website to promote and showcase the designs of a Toronto based fashion artist",
     "tech":["HTML", "CSS", "JavaScript"],
-    "image": "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638882786/EducationHub/photos/sun-blasts-a-m66-flare.jpg",
+    "image": "https://raw.githubusercontent.com/thecloakcollective/TheCloakCollective.github.io/refs/heads/master/images/NewLogo.JPG",
     "demoLink":"https://thecloakcollective.com"
   }
 ]
