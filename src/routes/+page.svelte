@@ -111,6 +111,40 @@
   let currentGreeting = $state(greetings[0]);
   let heroH1: HTMLElement;
 
+  let contactName = $state('');
+  let contactMessage = $state('');
+  let contactStatus = $state('');
+  let contactStatusType = $state<'success' | 'error' | ''>('');
+
+  function handleContactSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    contactStatus = '';
+    contactStatusType = '';
+
+    if (!contactName || !contactMessage) {
+      contactStatus = 'Please fill in all fields.';
+      contactStatusType = 'error';
+      return;
+    }
+
+    const recipientEmail = 'christianumbertogarcia@gmail.com';
+    const subject = encodeURIComponent(`Message from ${contactName}`);
+    const body = encodeURIComponent(
+      `Name: ${contactName}\n\nMessage:\n${contactMessage}`
+    );
+
+    const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+    window.location.href = mailtoUrl;
+
+    contactStatus = 'Opening your email client...';
+    contactStatusType = 'success';
+    setTimeout(() => {
+      contactName = '';
+      contactMessage = '';
+      contactStatus = '';
+    }, 1500);
+  }
+
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -325,15 +359,26 @@
     </div>
   </section>
 
-  <section class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
-    <div class="max-w-6xl mx-auto px-6 w-full">
-      <h2 class="text-6xl font-bold tracking-tighter">Skills</h2>
-    </div>
-  </section>
-
-  <section class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
+  <section id="contact" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
     <div class="max-w-6xl mx-auto px-6 w-full">
       <h2 class="text-6xl font-bold tracking-tighter">Contact</h2>
+      <p class="mt-4 text-lg text-gray-600">Send me a message and I&apos;ll get back to you as soon as possible.</p>
+
+      <form class="mt-8 space-y-4 max-w-xl" onsubmit={handleContactSubmit}>
+        <div>
+          <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
+          <input id="name" type="text" bind:value={contactName} required class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700" for="message">Message</label>
+          <textarea id="message" bind:value={contactMessage} required rows="5" class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+        </div>
+        <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700">Send Message</button>
+      </form>
+
+      {#if contactStatus}
+        <p class="mt-4 text-sm font-medium {contactStatusType === 'success' ? 'text-green-600' : 'text-red-600'}">{contactStatus}</p>
+      {/if}
     </div>
   </section>
 
