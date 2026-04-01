@@ -48,8 +48,7 @@
     supabase : Supabase
   };
 
-  let bioText = "Originally from Mexico and now based in Toronto, I have a huge curiosity for all things tech. I started out in pharmacology before moving into software engineering, hoping to one day bring both passions together. When I'm not working on projects, you can usually find me watching Formula 1 or attending orchestral shows.I love listening to a wide varitey of music spanning from Jazz to Pop to RnB.";
-  let characters = bioText.split("");
+  let bioText = "Originally from Mexico and now based in Toronto, I'm really curious about anything tech-related. I actually started out in pharmacology before moving into software engineering, with the hopes of eventually combining both worlds. When I'm not working on projects, I'm usually either watching Formula 1, gaming or getting lost in music, whether that's at an orchestral show or just vibing to anything from jazz to pop to R&B."; let characters = bioText.split("");
 
   let artistVideoUrl = $state('');
 
@@ -101,6 +100,17 @@
 
   let ageDecimal = $state(calculateAgeDecimal(stats.birthDate));
 
+  let currentIndex = 0;
+  const greetings = [
+    { name: "Hi, I'm Christian Garcia Flores", title: "Software Engineer" },
+    { name: "Hola, soy Christian Garcia Flores", title: "Ingeniero de Software" },
+    { name: "Ciao, sono Christian Garcia Flores", title: "Ingegnere del Software" },
+    { name: "Salut, je suis Christian Garcia Flores", title: "Ingénieur Logiciel" },
+    { name: "こんにちは、Christian Garcia Floresです", title: "ソフトウェアエンジニア" }
+  ];
+  let currentGreeting = $state(greetings[0]);
+  let heroH1: HTMLElement;
+
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -149,6 +159,16 @@
         duration: 0.4
       });
 
+    // Hero text animation - language transition
+    const heroTl = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+    heroTl.to(heroH1, { opacity: 0, duration: 0.3, ease: "power2.out" })
+      .call(() => { 
+        currentIndex = (currentIndex + 1) % greetings.length;
+        currentGreeting = greetings[currentIndex];
+      })
+      .to(heroH1, { opacity: 1, duration: 0.3, ease: "power2.in" })
+      .to({}, { duration: 1.5 }); // wait 1.5 seconds
+
     // Scramble Logic
     const charElements = textBlock.querySelectorAll('.char');
     textBlock.onpointermove = (e: PointerEvent) => {
@@ -189,9 +209,9 @@
   
   <section id="hero" class="h-screen max-w-6xl mx-auto px-6 flex items-center justify-between gap-12 bg-transparent">
     <div>
-      <h1 class="text-7xl font-bold pt-20 leading-tight">
-        Hi, I'm Christian Garcia Flores <br>
-        <span class="text-gray-400 text-6xl">Software Engineer</span>
+      <h1 bind:this={heroH1} class="text-7xl font-bold pt-20 leading-tight">
+        {currentGreeting.name} <br>
+        <span class="text-gray-400 text-6xl">{currentGreeting.title}</span>
       </h1> 
     </div>
     <img src={ChristianGarciaFlores} alt="Christian" class="rounded-2xl shadow-2xl max-w-sm">
