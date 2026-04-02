@@ -6,8 +6,8 @@
   import RotatingBackground from '$lib/components/RotatingBackground.svelte';
 
   import ChristianGarciaFlores from '$lib/assets/ChristianGarciaFlores.jpg';
-  import OpenCV from '$lib/assets/logos/OpenCV.svg'
-  import MP from '$lib/assets/logos/MediaPipe.svg'
+  import OpenCV from '$lib/assets/Logos/OpenCV.svg'
+  import MP from '$lib/assets/Logos/MediaPipe.svg'
   import React from '$lib/assets/Logos/React.svg'
   import Svelte from '$lib/assets/Logos/Svelte.svg'
   import GSAP from '$lib/assets/Logos/GSAP.svg'
