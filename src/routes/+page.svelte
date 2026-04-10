@@ -211,7 +211,7 @@
     timelineItems.forEach((item, idx) => {
       gsap.from(item, {
         opacity: 0,
-        x: idx % 2 === 0 ? -50 : 50,
+        x: idx % 2 === 0 ? -150 : 150,
         scrollTrigger: {
           trigger: item,
           start: "top 90%",
@@ -382,30 +382,33 @@
   </section>
 
   <section id="experience" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter mb-12">Experience</h2>
       
+      <!-- Centered timeline container -->
       <div class="relative">
+        <!-- Center line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-600 to-indigo-200"></div>
+
+        <!-- Timeline items -->
         {#each experience as item, idx (idx)}
-          <div class="timeline-item mb-12" style="--index: {idx}">
-            <div class="flex gap-6 lg:gap-12">
-              <!-- Timeline dot and line -->
-              <div class="flex flex-col items-center">
-                <div class="timeline-dot w-4 h-4 bg-indigo-600 rounded-full border-2 border-white shadow-lg"></div>
-                {#if idx !== experience.length - 1}
-                  <div class="timeline-line w-1 bg-linear-to-b from-indigo-600 to-indigo-200 grow" style="min-height: 120px;"></div>
-                {/if}
-              </div>
-              
-              <!-- Content -->
-              <div class="flex-1 pb-8 lg:pb-0">
-                <div class="bg-white rounded-xl p-6 lg:p-8 border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-                  <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p class="text-indigo-600 font-semibold mb-3">{item.business}</p>
-                  <p class="text-sm text-gray-500">{item.startDate} — {item.endDate}</p>
-                </div>
+          <div class="timeline-item mb-12 relative flex {idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}">
+            <!-- Left/Right content container -->
+            <div class="w-1/2 {idx % 2 === 0 ? 'pr-6 sm:pr-12 text-right' : 'pl-6 sm:pl-12 text-left'}">
+              <div class="bg-white rounded-xl p-6 lg:p-8 border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-indigo-600 font-semibold mb-3">{item.business}</p>
+                <p class="text-sm text-gray-500">{item.startDate} — {item.endDate}</p>
               </div>
             </div>
+
+            <!-- Center dot -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
+              <div class="timeline-dot w-4 h-4 bg-indigo-600 rounded-full border-4 border-white shadow-lg"></div>
+            </div>
+
+            <!-- Right/Left empty space -->
+            <div class="w-1/2"></div>
           </div>
         {/each}
       </div>
@@ -531,9 +534,5 @@
 
   .timeline-dot {
     flex-shrink: 0;
-  }
-
-  .timeline-line {
-    border-radius: 2px;
   }
 </style>
