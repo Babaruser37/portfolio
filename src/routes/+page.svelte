@@ -104,7 +104,7 @@
   const greetings = [
     { name: "Hi, I'm Christian Garcia Flores", title: "Software Engineer" },
     { name: "Hola, soy Christian Garcia Flores", title: "Ingeniero de Software" },
-    { name: "Ciao, sono Christian Garcia Flores", title: "Ingegnere del Software" },
+    { name: "Ciao, sono Christian Garcia Flores", title: "Ingegnere informatico" },
     { name: "Salut, je suis Christian Garcia Flores", title: "Ingénieur Logiciel" },
     { name: "こんにちは、Christian Garcia Floresです", title: "ソフトウェアエンジニア" }
   ];
@@ -325,6 +325,9 @@
             <button type="button" class="w-full h-full text-left" onclick={() => flippedIndex = flippedIndex === idx ? -1 : idx} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flippedIndex = flippedIndex === idx ? -1 : idx; } }}>
               <div class="flip-card-inner relative w-full h-96 rounded-3xl shadow-lg transition-transform duration-700 ease-out transform-style-preserve-3d{flippedIndex === idx ? ' flipped' : ''}" style="transform: {flippedIndex === idx ? 'rotateY(180deg)' : 'none'}">
               <div class="flip-card-face front absolute inset-0 rounded-3xl bg-white border border-gray-200 overflow-hidden flex flex-col items-center justify-center p-6">
+                <div class="absolute top-4 right-4 text-gray-400 group-hover:text-indigo-600 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64M3.51 15A9 9 0 0 0 18.36 18.36"/></svg>
+                </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">{project.title}</h3>
                 <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
                   {#each project.tech.slice(0,6) as tech, i (tech)}
@@ -398,6 +401,7 @@
 
   .perspective-1000 {
     perspective: 1000px;
+    transition: transform 0.3s ease;
   }
 
   .flip-card-inner {
@@ -440,8 +444,37 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Desktop hover still works, mobile uses click to toggle */
-  article:hover .flip-card-inner {
-    transform: rotateY(180deg);
+  /* Desktop hover and click behavior */
+  @media (hover: hover) {
+    article:hover {
+      transform: scale(1.05);
+    }
+    article:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  /* Icon indicator styles */
+  .flip-card-face.front svg {
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .flip-card-face.front svg {
+      opacity: 0;
+    }
+    article:hover .flip-card-face.front svg {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  @media (hover: none) {
+    /* Mobile: icon always visible */
+    .flip-card-face.front svg {
+      opacity: 0.6;
+      color: #4f46e5;
+    }
   }
 </style>
