@@ -5,7 +5,6 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import RotatingBackground from '$lib/components/RotatingBackground.svelte';
 
-  import ChristianGarciaFlores from '$lib/assets/ChristianGarciaFlores.jpg';
   import OpenCV from '$lib/assets/Logos/OpenCV.svg'
   import MP from '$lib/assets/Logos/MediaPipe.svg'
   import React from '$lib/assets/Logos/React.svg'
@@ -234,7 +233,6 @@
         <span class="text-gray-400 text-2xl sm:text-4xl lg:text-6xl">{currentGreeting.title}</span>
       </h1> 
     </div>
-    <img src={ChristianGarciaFlores} alt="Christian" class="rounded-2xl shadow-2xl w-full sm:w-80 lg:max-w-sm">
   </section>
 
   <section bind:this={aboutSection} id="about" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent backdrop-blur-sm">
