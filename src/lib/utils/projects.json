@@ -4,7 +4,7 @@
     "description": "A hardware-software integration allowing hands-free control of household appliances using real-time spatial mapping and coordinate tracking.",
     "tech": ["Python", "OpenCV", "MediaPipe", "React", "Postgres", "Docker"],
     "image": "https://lh3.googleusercontent.com/hMocN5AmKXj8bZF96zINiX8hfZRW-fcsEe0cMHP1ir6cogNe4sbzYspw0WweNm7w7ZWwtdwicDoxZmxoswA-GLMnYOfJQneYSQ=w3840-h2160-c-rw-v3",
-    "githubLink": "https://github.com/christian/example-handy-automator",
+    "githubLink": "https://github.com/caiocotts/handy-automator",
     "demoLink": "https://github.com/caiocotts/handy-automator"
   },
   {
