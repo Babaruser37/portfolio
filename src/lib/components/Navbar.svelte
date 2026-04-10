@@ -17,7 +17,7 @@
     </a>
 
     <div class="hidden md:flex items-center space-x-6 lg:space-x-10">
-      {#each navItems as item}
+      {#each navItems as item (item)}
         <a 
           href={item.href} 
           class="text-gray-600 hover:text-black text-xs sm:text-sm font-medium transition-all"
