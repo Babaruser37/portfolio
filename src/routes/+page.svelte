@@ -419,6 +419,14 @@
 
 </main>
 
+<footer class="border-t border-gray-100 bg-white/50 backdrop-blur-sm py-8 sm:py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+    <p class="text-gray-600 text-sm sm:text-base">
+      © {new Date().getFullYear()} Christian Garcia Flores. All rights reserved.
+    </p>
+  </div>
+</footer>
+
 <style>
   .char {
     transition: color 0.2s ease;
