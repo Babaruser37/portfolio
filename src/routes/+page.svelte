@@ -22,6 +22,7 @@
   import projects from  '$lib/utils/projects.json'
   import stats from '$lib/utils/stats.json'
   import experience from '$lib/utils/experience.json'
+  import education from '$lib/utils/education.json'
 
   
 
@@ -207,8 +208,8 @@
       .to({}, { duration: 1.5 }); // wait 1.5 seconds
 
     // Experience Timeline Animation
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    timelineItems.forEach((item, idx) => {
+    const experienceItems = document.querySelectorAll('#experience .timeline-item');
+    experienceItems.forEach((item, idx) => {
       gsap.from(item, {
         opacity: 0,
         x: idx % 2 === 0 ? -150 : 150,
@@ -220,6 +221,7 @@
         }
       });
     });
+
     // Scramble Logic
     const charElements = textBlock.querySelectorAll('.char');
     textBlock.onpointermove = (e: PointerEvent) => {
@@ -409,6 +411,41 @@
 
             <!-- Right/Left empty space -->
             <div class="w-1/2"></div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter mb-12">Education</h2>
+      
+      <div class="education-container">
+        {#each education as item (item.degree)}
+          <div class="education-card bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 sm:p-12 border border-indigo-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-indigo-300">
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.753 2 16.253s4.5 10 10 10 10-4.5 10-10S17.5 6.253 12 6.253z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">{item.degree}</h3>
+                <p class="text-indigo-600 font-semibold text-lg">{item.institution}</p>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div>
+                <p class="text-sm text-gray-600 font-medium">Field of Study</p>
+                <p class="text-base sm:text-lg text-gray-900 font-semibold">{item.field}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-600 font-medium">Duration</p>
+                <p class="text-base sm:text-lg text-gray-900">{item.startDate} — {item.endDate}</p>
+              </div>
+            </div>
           </div>
         {/each}
       </div>
