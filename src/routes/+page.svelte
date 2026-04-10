@@ -113,40 +113,7 @@
   let currentGreeting = $state(greetings[0]);
   let heroH1: HTMLElement;
 
-  let contactName = $state('');
-  let contactMessage = $state('');
-  let contactStatus = $state('');
-  let contactStatusType = $state<'success' | 'error' | ''>('');
   let flippedIndex = $state(-1);
-
-  function handleContactSubmit(event: SubmitEvent) {
-    event.preventDefault();
-    contactStatus = '';
-    contactStatusType = '';
-
-    if (!contactName || !contactMessage) {
-      contactStatus = 'Please fill in all fields.';
-      contactStatusType = 'error';
-      return;
-    }
-
-    const recipientEmail = 'christianumbertogarcia@gmail.com';
-    const subject = encodeURIComponent(`Message from ${contactName}`);
-    const body = encodeURIComponent(
-      `Name: ${contactName}\n\nMessage:\n${contactMessage}`
-    );
-
-    const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-    window.location.href = mailtoUrl;
-
-    contactStatus = 'Opening your email client...';
-    contactStatusType = 'success';
-    setTimeout(() => {
-      contactName = '';
-      contactMessage = '';
-      contactStatus = '';
-    }, 1500);
-  }
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -390,7 +357,7 @@
       <!-- Centered timeline container -->
       <div class="relative">
         <!-- Center line -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-600 to-indigo-200"></div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-indigo-600 to-indigo-200"></div>
 
         <!-- Timeline items -->
         {#each experience as item, idx (idx)}
@@ -423,13 +390,13 @@
       
       <div class="education-container">
         {#each education as item (item.degree)}
-          <div class="education-card bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 sm:p-12 border border-indigo-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-indigo-300">
+          <div class="education-card bg-linear-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 sm:p-12 border border-indigo-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-indigo-300">
             <div class="flex items-start gap-4 mb-6">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.753 2 16.253s4.5 10 10 10 10-4.5 10-10S17.5 6.253 12 6.253z"></path>
-                </svg>
-              </div>
+              <img 
+                src="https://www.georgebrown.ca/themes/custom/de_theme/logo.svg" 
+                alt="George Brown College logo" 
+                class="w-12 h-12 object-contain shrink-0"
+              />
               <div>
                 <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">{item.degree}</h3>
                 <p class="text-indigo-600 font-semibold text-lg">{item.institution}</p>
@@ -449,29 +416,6 @@
           </div>
         {/each}
       </div>
-    </div>
-  </section>
-
-  <section id="contact" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full py-12 sm:py-0">
-      <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">Contact</h2>
-      <p class="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600">Send me a message and I&apos;ll get back to you as soon as possible.</p>
-
-      <form class="mt-6 sm:mt-8 space-y-4 max-w-xl" onsubmit={handleContactSubmit}>
-        <div>
-          <label class="block text-xs sm:text-sm font-medium text-gray-700" for="name">Name</label>
-          <input id="name" type="text" bind:value={contactName} required class="mt-1 block w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base shadow-sm focus:ring-blue-500 focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-xs sm:text-sm font-medium text-gray-700" for="message">Message</label>
-          <textarea id="message" bind:value={contactMessage} required rows="5" class="mt-1 block w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
-        </div>
-        <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base text-white font-semibold hover:bg-blue-700 transition-colors">Send Message</button>
-      </form>
-
-      {#if contactStatus}
-        <p class="mt-4 text-sm font-medium {contactStatusType === 'success' ? 'text-green-600' : 'text-red-600'}">{contactStatus}</p>
-      {/if}
     </div>
   </section>
 
