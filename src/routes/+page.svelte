@@ -21,6 +21,7 @@
 
   import projects from  '$lib/utils/projects.json'
   import stats from '$lib/utils/stats.json'
+  import experience from '$lib/utils/experience.json'
 
   
 
@@ -205,6 +206,20 @@
       .to(heroH1, { opacity: 1, duration: 0.3, ease: "power2.in" })
       .to({}, { duration: 1.5 }); // wait 1.5 seconds
 
+    // Experience Timeline Animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, idx) => {
+      gsap.from(item, {
+        opacity: 0,
+        x: idx % 2 === 0 ? -50 : 50,
+        scrollTrigger: {
+          trigger: item,
+          start: "top 90%",
+          end: "top 70%",
+          scrub: 0.5
+        }
+      });
+    });
     // Scramble Logic
     const charElements = textBlock.querySelectorAll('.char');
     textBlock.onpointermove = (e: PointerEvent) => {
@@ -366,6 +381,37 @@
     </div>
   </section>
 
+  <section id="experience" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter mb-12">Experience</h2>
+      
+      <div class="relative">
+        {#each experience as item, idx (idx)}
+          <div class="timeline-item mb-12" style="--index: {idx}">
+            <div class="flex gap-6 lg:gap-12">
+              <!-- Timeline dot and line -->
+              <div class="flex flex-col items-center">
+                <div class="timeline-dot w-4 h-4 bg-indigo-600 rounded-full border-2 border-white shadow-lg"></div>
+                {#if idx !== experience.length - 1}
+                  <div class="timeline-line w-1 bg-linear-to-b from-indigo-600 to-indigo-200 grow" style="min-height: 120px;"></div>
+                {/if}
+              </div>
+              
+              <!-- Content -->
+              <div class="flex-1 pb-8 lg:pb-0">
+                <div class="bg-white rounded-xl p-6 lg:p-8 border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+                  <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p class="text-indigo-600 font-semibold mb-3">{item.business}</p>
+                  <p class="text-sm text-gray-500">{item.startDate} — {item.endDate}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+
   <section id="contact" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full py-12 sm:py-0">
       <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">Contact</h2>
@@ -476,5 +522,18 @@
       opacity: 0.6;
       color: #4f46e5;
     }
+  }
+
+  /* Timeline styles */
+  .timeline-item {
+    transition: opacity 0.6s ease;
+  }
+
+  .timeline-dot {
+    flex-shrink: 0;
+  }
+
+  .timeline-line {
+    border-radius: 2px;
   }
 </style>
