@@ -5,10 +5,6 @@
   import ico from '$lib/assets/ico.ico';
 
   onMount(() => {
-    // Skip Lenis on touch devices — it intercepts touchmove events and
-    // prevents native single-finger scrolling on mobile.
-    if (window.matchMedia('(hover: none)').matches) return;
-
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Standard "smooth" curve

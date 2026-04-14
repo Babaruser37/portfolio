@@ -174,11 +174,14 @@
       .to({}, { duration: 1.5 }); // wait 1.5 seconds
 
     // Experience Timeline Animation
+    const isTouch = window.matchMedia('(hover: none)').matches;
     const experienceItems = document.querySelectorAll('#experience .timeline-item');
     experienceItems.forEach((item, idx) => {
       gsap.from(item, {
         opacity: 0,
-        x: idx % 2 === 0 ? -150 : 150,
+        // On touch devices skip the horizontal offset — translated elements outside
+        // the viewport confuse iOS Safari's scroll hit-testing and block single-finger scroll.
+        x: isTouch ? 0 : (idx % 2 === 0 ? -150 : 150),
         scrollTrigger: {
           trigger: item,
           start: "top 90%",
