@@ -1,4 +1,6 @@
 <script lang="ts">
+  let mobileMenuOpen = $state(false);
+
   const navItems = [
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
@@ -7,7 +9,7 @@
   ];
 </script>
 
-<nav class="sticky md:fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-md border-b border-white/20 shadow-sm font-sans">
+<nav class="sticky md:fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-white/20 shadow-sm font-sans">
   <div class="w-full px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
     
     <a 
@@ -29,6 +31,20 @@
     </div>
 
     <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+      <button
+        type="button"
+        class="md:hidden flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100"
+        aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={mobileMenuOpen}
+        onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+      >
+        {#if mobileMenuOpen}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        {:else}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+        {/if}
+      </button>
+
       <a 
         href="https://github.com/Babaruser37" 
         target="_blank"
@@ -59,4 +75,20 @@
     </div>
     
   </div>
+
+  {#if mobileMenuOpen}
+    <div class="md:hidden px-4 pb-4">
+      <div class="rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-3 flex flex-col gap-1">
+        {#each navItems as item (item)}
+          <a
+            href={item.href}
+            class="px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100"
+            onclick={() => (mobileMenuOpen = false)}
+          >
+            {item.name}
+          </a>
+        {/each}
+      </div>
+    </div>
+  {/if}
 </nav>

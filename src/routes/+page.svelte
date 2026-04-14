@@ -224,7 +224,7 @@
 
 <Navbar />
 
-<main class="relative z-10 font-sans"> 
+<main id="top" class="relative z-10 font-sans"> 
   
   <section id="hero" class="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-8 lg:gap-12 bg-transparent py-12 sm:py-0">
     <div class="pt-12 sm:pt-20 flex-1">
@@ -235,7 +235,7 @@
     </div>
   </section>
 
-  <section bind:this={aboutSection} id="about" class="min-h-screen border-t border-gray-100 flex items-center bg-transparent backdrop-blur-sm">
+  <section bind:this={aboutSection} id="about" class="scroll-mt-24 min-h-screen border-t border-gray-100 flex items-center bg-transparent backdrop-blur-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full py-12 sm:py-0">
       <div class="overflow-hidden mb-8 sm:mb-12">
         <h2 bind:this={aboutTitle} class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">About Me</h2>
@@ -263,12 +263,12 @@
         </div>
         <div class="stat text-center">
           <button
-            class="text-4xl font-bold text-blue-600 hover:text-blue-800 focus:outline-none"
+            class="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 hover:text-blue-800 focus:outline-none"
             onclick={openArtistVideo}
           >
             {stats.favouriteArtist}
           </button>
-          <div class="text-lg text-gray-600">Favourite Artist (click to open song)</div>
+          <div class="text-sm sm:text-base lg:text-lg text-gray-600">Favourite Artist (click to open song)</div>
         </div>
       </div>
 
@@ -298,7 +298,7 @@
     </div>
   </section>
 
-  <section id="projects" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+  <section id="projects" class="scroll-mt-24 border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter">Featured Work</h2>
       <div class="mt-6 sm:mt-8 lg:mt-10 grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -348,20 +348,20 @@
     </div>
   </section>
 
-  <section id="experience" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+  <section id="experience" class="scroll-mt-24 border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter mb-12">Experience</h2>
       
       <!-- Centered timeline container -->
       <div class="relative">
         <!-- Center line -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-indigo-600 to-indigo-200"></div>
+        <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-indigo-600 to-indigo-200"></div>
 
         <!-- Timeline items -->
         {#each experience as item, idx (idx)}
-          <div class="timeline-item mb-12 relative flex {idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}">
+          <div class={`timeline-item mb-12 relative flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
             <!-- Left/Right content container -->
-            <div class="w-1/2 {idx % 2 === 0 ? 'pr-6 sm:pr-12 text-right' : 'pl-6 sm:pl-12 text-left'}">
+            <div class="w-full md:w-1/2 pl-12 md:pl-0 text-left {idx % 2 === 0 ? 'md:pr-6 lg:pr-12 md:text-right' : 'md:pl-6 lg:pl-12 md:text-left'}">
               <div class="bg-white rounded-xl p-6 lg:p-8 border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p class="text-indigo-600 font-semibold mb-3">{item.business}</p>
@@ -370,19 +370,19 @@
             </div>
 
             <!-- Center dot -->
-            <div class="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
+            <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-8 flex justify-center">
               <div class="timeline-dot w-4 h-4 bg-indigo-600 rounded-full border-4 border-white shadow-lg"></div>
             </div>
 
             <!-- Right/Left empty space -->
-            <div class="w-1/2"></div>
+            <div class="hidden md:block w-1/2"></div>
           </div>
         {/each}
       </div>
     </div>
   </section>
 
-  <section id="education" class="border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
+  <section id="education" class="scroll-mt-24 border-t border-gray-100 bg-transparent py-12 sm:py-16 lg:py-20">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter mb-12">Education</h2>
       
