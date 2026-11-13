@@ -3,13 +3,13 @@
     "title": "Handy Automator",
     "description": "A hardware-software integration allowing hands-free control of household appliances using real-time spatial mapping and coordinate tracking.",
     "tech": ["Python", "OpenCV", "MediaPipe", "React", "Postgres", "Docker"],
-    "image": "https://lh3.googleusercontent.com/hMocN5AmKXj8bZF96zINiX8hfZRW-fcsEe0cMHP1ir6cogNe4sbzYspw0WweNm7w7ZWwtdwicDoxZmxoswA-GLMnYOfJQneYSQ=w3840-h2160-c-rw-v3",
+    "image": "src/lib/assets/CardBG/handy-automator.png",
     "githubLink": "https://github.com/caiocotts/handy-automator",
-    "demoLink": "https://github.com/caiocotts/handy-automator"
+    "demoLink": "/handy-automator"
   },
   {
     "title": "Interactive Developer Portfolio",
-    "description": "A high-performance web application utilizing modern frontend frameworks and complex scroll-driven timeline animations.",
+    "description": "You're looking at it! Check out that rotating wheel; watching it spin brings me pure joy.",
     "tech": ["Svelte", "TypeScript", "GSAP", "Tailwind", "Nodejs"],
     "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000",
     "githubLink": "https://github.com/Babaruser37/portfolio"
