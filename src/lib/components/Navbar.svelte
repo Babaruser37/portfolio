@@ -76,7 +76,7 @@
       </a>
 
       <a 
-        href="mailto:contact@babarabbasi.com"
+        href="mailto:babaruser37@gmail.com"
         class="flex items-center justify-center w-8 h-8 sm:w-auto sm:h-auto sm:gap-2 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-medium hover:bg-blue-700 transition-all"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
